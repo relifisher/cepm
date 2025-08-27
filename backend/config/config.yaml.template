@@ -1,0 +1,24 @@
+# Server configuration
+server:
+  port: "8080"
+  mode: "debug" # debug, release, test
+
+# Database configuration (PostgreSQL)
+database:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "vizen2025"
+  dbname: "cepm"
+  sslmode: "disable" # disable, require, verify-full
+
+# WeChat Work (企业微信) configuration
+wechat:
+  corp_id: "ww40bcae13177b01e9"
+  corp_secret: "D7DlaSVI48f2rrv2I5omlvlf-JSzBCiFVJyZWR-5xmw"
+  agent_id: 1000062
+
+# JWT (JSON Web Token) configuration
+jwt:
+  secret_key: "fnLsvy4jWpKbNPHExLpgDpPdRoLXv545t+QEKdKuF/8="
+  expire_hours: 72

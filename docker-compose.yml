@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database Service
+  db:
+    image: postgres:15-alpine
+    container_name: cepm_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres # Corresponds to config.yaml.template
+      POSTGRES_PASSWORD: vizen2025 # Corresponds to config.yaml.template
+      POSTGRES_DB: cepm # Corresponds to config.yaml.template
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d cepm"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Go Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: builder
+    working_dir: /app
+    container_name: cepm_backend
+    restart: unless-stopped
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./backend:/app # Mount source code for live reload
+      - ./backend/config:/app/config # Mount config directory
+    depends_on:
+      db:
+        condition: service_healthy
+    command: go run main.go # Use go run for development to auto-rebuild on changes
+
+volumes:
+  postgres_data:

@@ -1,0 +1,50 @@
+# Go binaries and build outputs
+cepm-backend
+
+# Go module cache
+# go.sum is usually committed, but if you have a vendor directory, ignore it
+# vendor/
+
+# Node.js dependencies
+node_modules/
+
+# Frontend build outputs
+frontend/build/
+
+# IDE and editor files
+.vscode/
+.idea/
+.DS_Store
+
+# Environment variables and sensitive configuration
+backend/config/config.yaml
+
+# Logs
+*.log
+
+# Temporary files
+*~
+*.tmp
+
+# Docker volumes
+# If you manage Docker volumes outside of docker-compose, you might want to ignore them
+# For example, if you have a named volume for postgres data:
+# postgres_data/
+
+# Other common ignores
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# npm debug logs
+npm-debug.log*
+.yarn-integrity
+.yarn-cache
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
